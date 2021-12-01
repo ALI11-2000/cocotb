@@ -1,0 +1,51 @@
+# Copyright cocotb contributors
+# Licensed under the Revised BSD License, see LICENSE for details.
+# SPDX-License-Identifier: BSD-3-Clause
+name: Regression Tests
+
+on:
+  push:
+    branches:
+      - local'
+
+jobs:
+
+  lint-whitespace:
+    runs-on: self-hosted
+    name: whitespace
+    steps:
+    - uses: actions/checkout@v2
+    - name: whitespace
+      run: |
+        ! git --no-pager grep --color --line-number --full-name --extended-regexp -I '\s+$'
+
+  lint-flake8:
+    runs-on: self-hosted
+    - name: flake8
+      run: |
+        flake8
+
+  tests:
+
+    name: ${{matrix.extra_name}}${{matrix.sim}} (${{matrix.sim-version}}) | ${{matrix.os}} | Python ${{matrix.python-version}} ${{matrix.may_fail && '| May Fail' || ''}}
+    runs-on: ${{matrix.os}}
+    env:
+      SIM: 'icarus'
+      TOPLEVEL_LANG: 'verilog'
+      CXX: ${{matrix.cxx || 'g++'}}
+      CC: ${{matrix.cc || 'gcc'}}
+      OS: ${{matrix.os}}
+      PYTHON_VERSION: ${{matrix.python-version}}
+      TOX_TESTENV_PASSENV: GITHUB_ACTIONS
+
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Test (Ubuntu, MacOS)
+      continue-on-error: false
+      timeout-minutes: 15
+      run: |
+        tox
