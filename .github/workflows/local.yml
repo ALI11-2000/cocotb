@@ -1,7 +1,7 @@
 # Copyright cocotb contributors
 # Licensed under the Revised BSD License, see LICENSE for details.
 # SPDX-License-Identifier: BSD-3-Clause
-name: Regression Tests
+name: Regression Tests Local 1
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
     name: ${{matrix.extra_name}}${{matrix.sim}} (${{matrix.sim-version}}) | ${{matrix.os}} | Python ${{matrix.python-version}} ${{matrix.may_fail && '| May Fail' || ''}}
     runs-on: self-hosted
     env:
-      SIM: 'icarus'
+      SIM: 'questa'
       TOPLEVEL_LANG: 'verilog'
       CXX: ${{matrix.cxx || 'g++'}}
       CC: ${{matrix.cc || 'gcc'}}
