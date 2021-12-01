@@ -6,7 +6,7 @@ name: Regression Tests
 on:
   push:
     branches:
-      - local'
+      - local
 
 jobs:
 
