@@ -21,6 +21,8 @@ jobs:
 
   lint-flake8:
     runs-on: self-hosted
+    name: flake8
+    steps:
     - name: flake8
       run: |
         flake8
