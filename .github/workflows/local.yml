@@ -31,7 +31,7 @@ jobs:
   tests:
 
     name: ${{matrix.extra_name}}${{matrix.sim}} (${{matrix.sim-version}}) | ${{matrix.os}} | Python ${{matrix.python-version}} ${{matrix.may_fail && '| May Fail' || ''}}
-    runs-on: ${{matrix.os}}
+    runs-on: self-hosted
     env:
       SIM: 'icarus'
       TOPLEVEL_LANG: 'verilog'
