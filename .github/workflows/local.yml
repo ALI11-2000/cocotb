@@ -33,10 +33,10 @@ jobs:
 
   tests:
 
-    name: ${{matrix.extra_name}}${{matrix.sim}} (${{matrix.sim-version}}) | ${{matrix.os}} | Python ${{matrix.python-version}} ${{matrix.may_fail && '| May Fail' || ''}}
+    name: iverilog local regression
     runs-on: self-hosted
     env:
-      SIM: 'questa'
+      SIM: 'icarus'
       TOPLEVEL_LANG: 'verilog'
       CXX: ${{matrix.cxx || 'g++'}}
       CC: ${{matrix.cc || 'gcc'}}
